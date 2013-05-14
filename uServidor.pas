@@ -80,6 +80,16 @@ type
     Servidor_string_retorno: TEdit;
     btnOpcoes: TButton;
     Servidor_Arquivo_Log: TLabel;
+    tabRetorno: TTabSheet;
+    GroupBox7: TGroupBox;
+    Label5: TLabel;
+    edtChave: TEdit;
+    edtValor: TEdit;
+    Label7: TLabel;
+    btnAddChave: TButton;
+    lvChaves: TListView;
+    btnRemoveChave: TButton;
+    btnRemoveAll: TButton;
     procedure FormCreate(Sender: TObject);
     procedure PlayServidorClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -102,6 +112,10 @@ type
     procedure listaThreadsColumnClick(Sender: TObject;
       Column: TListColumn);
     procedure btnOpcoesClick(Sender: TObject);
+    procedure btnAddChaveClick(Sender: TObject);
+    procedure btnRemoveAllClick(Sender: TObject);
+    procedure btnRemoveChaveClick(Sender: TObject);
+    procedure edtChaveKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     Hoje: TDate;
@@ -122,7 +136,7 @@ var
   
 implementation
 
-uses uLogs, uProcessosThreads;
+uses uLogs, uProcessosThreads, uPrincipal;
 
 {$R *.dfm}
 
@@ -586,5 +600,89 @@ begin
   WSACleanup;
 end;
 
+procedure GravaChaves(const lvChaves: TListView);
+var
+  i:    integer;
+  item: TListItem;
+  sChave, sValor, sList: String;
+begin
+  for i := 0 to lvChaves.Items.Count -1 do
+  begin
+    item   := lvChaves.Items[i];
+    sChave := item.Caption;
+    sValor := item.SubItems[0];
+
+    sList := sList + '"' + sChave + '=' + sValor + '",';
+  end;
+
+  formServidor.Servidor_string_retorno.Text := sList;
+  formPrincipal.SalvarConfiguracoes;
+  
+end;
+
+procedure TformServidor.btnAddChaveClick(Sender: TObject);
+var
+  sChave, sValor: string;
+  item: TListItem;
+begin
+  sChave := trim(edtChave.Text);
+  sValor := trim(edtValor.Text);
+  if (sChave = '') or (sValor = '') then exit;
+
+  item   := lvChaves.FindCaption(0, sChave, false, true, true);
+
+  if (item <> nil) then exit;
+
+  item   := lvChaves.Items.Add;
+
+  item.Caption := edtChave.Text;
+  item.SubItems.Add(edtValor.Text);
+
+  GravaChaves(lvChaves);
+
+  edtChave.SetFocus;
+end;
+
+procedure TformServidor.btnRemoveAllClick(Sender: TObject);
+begin
+  with lvChaves.Items do
+  begin
+    BeginUpdate;
+    Clear;
+    EndUpdate;
+  end;
+  GravaChaves(lvChaves);
+end;
+
+procedure TformServidor.btnRemoveChaveClick(Sender: TObject);
+var
+  item: TListItem;
+  i: integer;
+begin
+  item := lvChaves.Selected;
+
+  if (item = nil) then exit;
+
+  i := item.Index;
+
+  with lvChaves.Items do
+  begin
+    BeginUpdate;
+    lvChaves.DeleteSelected;
+    EndUpdate;
+  end;
+
+  if (i > lvChaves.Items.Count -1) then i := lvChaves.Items.Count -1;
+  lvChaves.ItemIndex := i;
+  GravaChaves(lvChaves);
+end;
+
+procedure TformServidor.edtChaveKeyPress(Sender: TObject; var Key: Char);
+begin
+  if (key = #13) then
+  begin
+    btnAddChave.Click;
+  end;
+end;
 
 end.

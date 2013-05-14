@@ -21,10 +21,10 @@ type
   private
     { Private declarations }
    procedure DetalhePrincipal(const nivel: integer; const detalhe: string);
-   procedure SalvarConfiguracoes;
    procedure RestauraConfiguracoes;
   public
     { Public declarations }
+   procedure SalvarConfiguracoes;
   end;
 
 var

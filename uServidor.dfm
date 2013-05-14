@@ -1,8 +1,8 @@
 object formServidor: TformServidor
   Left = 274
   Top = 146
-  Width = 644
-  Height = 480
+  Width = 812
+  Height = 502
   Caption = 'Servidor'
   Color = clWindow
   Ctl3D = False
@@ -24,9 +24,9 @@ object formServidor: TformServidor
   object PageControl1: TPageControl
     Left = 145
     Top = 42
-    Width = 491
-    Height = 404
-    ActivePage = tabLog
+    Width = 659
+    Height = 426
+    ActivePage = tabRede
     Align = alClient
     Style = tsButtons
     TabOrder = 0
@@ -85,15 +85,15 @@ object formServidor: TformServidor
       object GroupBox3: TGroupBox
         Left = 0
         Top = 0
-        Width = 483
-        Height = 373
+        Width = 651
+        Height = 395
         Align = alClient
         Caption = ' Ocorr'#234'ncias '
         TabOrder = 0
         object Panel1: TPanel
           Left = 1
           Top = 14
-          Width = 481
+          Width = 649
           Height = 140
           Align = alTop
           BevelOuter = bvNone
@@ -102,7 +102,7 @@ object formServidor: TformServidor
           object Shape9: TShape
             Left = 0
             Top = 139
-            Width = 481
+            Width = 649
             Height = 1
             Align = alBottom
             Pen.Color = clSilver
@@ -220,8 +220,8 @@ object formServidor: TformServidor
         object logServidor: TMemo
           Left = 1
           Top = 154
-          Width = 481
-          Height = 218
+          Width = 649
+          Height = 240
           Cursor = crArrow
           Align = alClient
           BorderStyle = bsNone
@@ -240,15 +240,15 @@ object formServidor: TformServidor
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
-        Width = 483
-        Height = 373
+        Width = 651
+        Height = 395
         Align = alClient
         Caption = 'Conex'#245'es'
         TabOrder = 0
         object Panel4: TPanel
           Left = 1
           Top = 14
-          Width = 481
+          Width = 649
           Height = 43
           Align = alTop
           BevelOuter = bvNone
@@ -257,7 +257,7 @@ object formServidor: TformServidor
           object Shape2: TShape
             Left = 0
             Top = 42
-            Width = 481
+            Width = 649
             Height = 1
             Align = alBottom
             Pen.Color = clSilver
@@ -275,8 +275,8 @@ object formServidor: TformServidor
         object Panel5: TPanel
           Left = 1
           Top = 57
-          Width = 481
-          Height = 315
+          Width = 649
+          Height = 337
           Align = alClient
           BevelOuter = bvNone
           BorderWidth = 5
@@ -285,8 +285,8 @@ object formServidor: TformServidor
           object listaThreads: TListView
             Left = 5
             Top = 5
-            Width = 471
-            Height = 305
+            Width = 639
+            Height = 327
             Align = alClient
             BevelOuter = bvNone
             BorderStyle = bsNone
@@ -335,11 +335,104 @@ object formServidor: TformServidor
         end
       end
     end
+    object tabRetorno: TTabSheet
+      Caption = 'tabRetorno'
+      ImageIndex = 3
+      object GroupBox7: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 617
+        Height = 353
+        Caption = ' Retorno '
+        TabOrder = 0
+        object Label5: TLabel
+          Left = 16
+          Top = 24
+          Width = 31
+          Height = 13
+          Caption = 'Chave'
+        end
+        object Label7: TLabel
+          Left = 176
+          Top = 24
+          Width = 24
+          Height = 13
+          Caption = 'Valor'
+        end
+        object edtChave: TEdit
+          Left = 16
+          Top = 40
+          Width = 153
+          Height = 19
+          TabOrder = 0
+          OnKeyPress = edtChaveKeyPress
+        end
+        object edtValor: TEdit
+          Left = 176
+          Top = 40
+          Width = 153
+          Height = 19
+          TabOrder = 1
+          OnKeyPress = edtChaveKeyPress
+        end
+        object btnAddChave: TButton
+          Left = 336
+          Top = 37
+          Width = 113
+          Height = 24
+          Caption = 'Adiciona'
+          TabOrder = 2
+          OnClick = btnAddChaveClick
+        end
+        object lvChaves: TListView
+          Left = 16
+          Top = 72
+          Width = 313
+          Height = 265
+          Columns = <
+            item
+              Caption = 'Chave'
+              Width = 155
+            end
+            item
+              Caption = 'Valor'
+              Width = 155
+            end>
+          ColumnClick = False
+          GridLines = True
+          HideSelection = False
+          ReadOnly = True
+          RowSelect = True
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          ViewStyle = vsReport
+        end
+        object btnRemoveChave: TButton
+          Left = 336
+          Top = 69
+          Width = 113
+          Height = 24
+          Caption = 'Remove Selecionado'
+          TabOrder = 4
+          OnClick = btnRemoveChaveClick
+        end
+        object btnRemoveAll: TButton
+          Left = 336
+          Top = 101
+          Width = 113
+          Height = 24
+          Caption = 'Remove Tudo'
+          TabOrder = 5
+          OnClick = btnRemoveAllClick
+        end
+      end
+    end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 636
+    Width = 804
     Height = 42
     Align = alTop
     BevelOuter = bvNone
@@ -422,7 +515,7 @@ object formServidor: TformServidor
     Left = 0
     Top = 42
     Width = 145
-    Height = 404
+    Height = 426
     Align = alLeft
     BevelOuter = bvNone
     ParentColor = True
@@ -431,14 +524,14 @@ object formServidor: TformServidor
       Left = 8
       Top = 6
       Width = 129
-      Height = 75
+      Height = 91
       Caption = 'Op'#231#245'es'
       TabOrder = 0
       object TreeView1: TTreeView
         Left = 4
-        Top = 18
+        Top = 16
         Width = 120
-        Height = 53
+        Height = 65
         BorderStyle = bsNone
         HideSelection = False
         HotTrack = True
@@ -447,15 +540,16 @@ object formServidor: TformServidor
         TabOrder = 0
         OnClick = TreeView1Click
         Items.Data = {
-          030000001D0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
+          040000001D0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
           0452656465240000000000000000000000FFFFFFFFFFFFFFFF00000000000000
           000B4F636F7272EA6E63696173210000000000000000000000FFFFFFFFFFFFFF
-          FF000000000000000008436F6E6578F56573}
+          FF000000000000000008436F6E6578F56573200000000000000000000000FFFF
+          FFFFFFFFFFFF0000000000000000075265746F726E6F}
       end
     end
     object GroupBox4: TGroupBox
       Left = 8
-      Top = 86
+      Top = 110
       Width = 129
       Height = 307
       Caption = 'Resumo'
