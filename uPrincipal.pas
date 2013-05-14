@@ -32,6 +32,9 @@ var
   flag1: boolean;
   FN_ARQUIVO_INICIALIZACAO: string;
 
+const
+  MSG_SAIR = 'Você está prestes a encerrar o Autorizador. Isto poderá afetar o funcionamento de todo o sistema de autorização, você está certo que deseja finalizar?';
+
 implementation
 
 uses UServidor, uLogs;
@@ -85,7 +88,10 @@ end;
 
 procedure TformPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Hide;
+  if (Application.MessageBox(MSG_SAIR,'Aviso! Encerrando Autorizador.', MB_YESNO + MB_ICONQUESTION) = IDYES) then
+  begin
+    Application.Terminate;
+  end;
   Action := caNone;
 end;
 
@@ -94,10 +100,9 @@ end;
 // Encerrar o programa
 procedure TformPrincipal.Encerrar1Click(Sender: TObject);
 begin
-  if (Application.MessageBox('Você está prestes a encerrar o Autorizador. Isto poderá afetar o funcionamento de todo o sistema de autorização, você está certo que deseja finalizar?','Aviso! Encerrando Autorizador.', MB_YESNO + MB_ICONQUESTION) = IDYES) then
+  if (Application.MessageBox(MSG_SAIR,'Aviso! Encerrando Autorizador.', MB_YESNO + MB_ICONQUESTION) = IDYES) then
   begin
     Application.Terminate;
-    Close;
   end;
 end;
 

@@ -106,7 +106,7 @@ begin
    //Application.ProcessMessages;
    strBuffer := Buffer;
    h1        := now; // Apenas para contabilizar o tempo gasto
-
+   
    {
 
 
