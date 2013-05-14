@@ -160,7 +160,7 @@ begin
   Servidor_Arquivo_Log.Caption    := ExtractFileDir(Application.ExeName) + '\Logs\logServidor_'+FormatDateTime('yyyymmdd', now) + '.txt';
 
   lblDias.Caption := '';
-  Panel1.Height   := 75;
+  Panel1.Height   := 85;
 
   PlayServidor.Click;
 end;
@@ -339,7 +339,13 @@ begin
   Servidor_Endereco_IP.Caption := Socket.LocalAddress;
 
   bytesRecebidos := StrToIntDef(Servidor_Bytes_Recebidos.Caption, 0);
-  strBuffer      := Socket.ReceiveText;
+  try
+    strBuffer      := Socket.ReceiveText;
+  except
+      on e: exception do begin
+        Detalhe(5, '(skt:' + IntToStr(Socket.SocketHandle) + ') Erro de exception ao receber mensagem: ('+ e.Message);
+      end;
+  end;
 
   strCommand                       := trim(strBuffer);
   bytesRecebidos                   := bytesRecebidos + length(strCommand);
@@ -544,12 +550,12 @@ begin
   begin
     btnOpcoes.Caption := '<< Menos opções';
     btnOpcoes.Tag     := 1;
-    Panel1.Height     := 130;
+    Panel1.Height     := 140;
   end else
   begin
     btnOpcoes.Caption := 'Mais opções >>';
     btnOpcoes.Tag     := 0;
-    Panel1.Height     := 75;
+    Panel1.Height     := 85;
   end;
 end;
 

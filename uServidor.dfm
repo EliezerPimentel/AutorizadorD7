@@ -26,7 +26,7 @@ object formServidor: TformServidor
     Top = 42
     Width = 491
     Height = 404
-    ActivePage = tabRede
+    ActivePage = tabLog
     Align = alClient
     Style = tsButtons
     TabOrder = 0
@@ -94,14 +94,14 @@ object formServidor: TformServidor
           Left = 1
           Top = 14
           Width = 481
-          Height = 130
+          Height = 140
           Align = alTop
           BevelOuter = bvNone
           Color = 15132364
           TabOrder = 0
           object Shape9: TShape
             Left = 0
-            Top = 129
+            Top = 139
             Width = 481
             Height = 1
             Align = alBottom
@@ -109,7 +109,7 @@ object formServidor: TformServidor
           end
           object Label13: TLabel
             Left = 8
-            Top = 86
+            Top = 94
             Width = 115
             Height = 13
             Caption = 'N'#237'vel de detalhes (0-10)'
@@ -122,7 +122,7 @@ object formServidor: TformServidor
           end
           object Label12: TLabel
             Left = 136
-            Top = 86
+            Top = 94
             Width = 134
             Height = 13
             Caption = 'Mostrar somente as '#250'ltimas '
@@ -135,7 +135,7 @@ object formServidor: TformServidor
           end
           object Label14: TLabel
             Left = 182
-            Top = 103
+            Top = 111
             Width = 72
             Height = 13
             Caption = 'linhas (10-400)'
@@ -173,7 +173,7 @@ object formServidor: TformServidor
           end
           object nivelDet: TSpinEdit
             Left = 8
-            Top = 100
+            Top = 108
             Width = 41
             Height = 22
             MaxValue = 10
@@ -199,7 +199,7 @@ object formServidor: TformServidor
           end
           object ultLinhas: TSpinEdit
             Left = 136
-            Top = 100
+            Top = 108
             Width = 41
             Height = 22
             MaxValue = 400
@@ -211,7 +211,7 @@ object formServidor: TformServidor
             Left = 8
             Top = 56
             Width = 97
-            Height = 17
+            Height = 25
             Caption = 'Mais op'#231#245'es >>'
             TabOrder = 5
             OnClick = btnOpcoesClick
@@ -219,9 +219,9 @@ object formServidor: TformServidor
         end
         object logServidor: TMemo
           Left = 1
-          Top = 144
+          Top = 154
           Width = 481
-          Height = 228
+          Height = 218
           Cursor = crArrow
           Align = alClient
           BorderStyle = bsNone

@@ -58,7 +58,10 @@ begin
       Socket.Close;
       dispose(socket.Data);
     except
-
+      on e: exception do
+      begin
+        DetalheServidor(5, '(skt:' + IntToStr(idSocket) + ')(th:' + IntToStr(ThreadID) +  ') Erro ao liberar a Thread: ' + e.Message);
+      end;
     end;
   end;
 
@@ -103,7 +106,7 @@ end;
 procedure TProcessos.ProcessaBuffer;
 var strBuffer: string;
 begin
-   //Application.ProcessMessages;
+   Application.ProcessMessages;
    strBuffer := Buffer;
    h1        := now; // Apenas para contabilizar o tempo gasto
    
@@ -113,7 +116,7 @@ begin
 
 
 
-    Processando o buffer
+    Processando o buffer: Nesta área deve ser processado o conteúdo recebido
 
 
 
@@ -121,7 +124,8 @@ begin
 
    }
 
-
+   // A string com o conteúdo de retorno deve ser enviada pela varivel:
+   // strRetornoAutor
    strRetornoAutor := formServidor.Servidor_string_retorno.Text;
    Synchronize(MandaResposta);
 end;
@@ -133,14 +137,21 @@ var
     bytesEnviados: Word;
     strToSend: String;
 begin
-  strToSend := strRetornoAutor;
-
+  strToSend     := strRetornoAutor;
+  bytesEnviados := 0;
+  
   if (Socket = nil) then exit;
 
   //Socket.Lock;
   if (Socket.Connected) then
   begin
-    bytesEnviados := Socket.SendText(strToSend);
+    try
+      bytesEnviados := Socket.SendText(strToSend);
+    except
+      on e: exception do begin
+        DetalheServidor(5, '(skt:' + IntToStr(Socket.SocketHandle) + ') Erro de exception ao enviar mensagem: ('+ e.Message);
+      end;
+    end;
 
     if (bytesEnviados > 0) then
     begin
