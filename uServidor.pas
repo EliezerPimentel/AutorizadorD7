@@ -441,8 +441,7 @@ begin
     item.Caption    := IntToStr(SocketID);
     item.ImageIndex := 4;
     item.SubItems.Add(IntToStr(ThreadID));
-    //item.SubItems.Add(formatDateTime('dd/mm/yyyy hh:nn:ss:zz', now));
-    item.SubItems.Add('');
+    item.SubItems.Add(formatDateTime('dd/mm/yyyy hh:nn:ss:zz', now));
     item.SubItems.Add(origem);
     item.SubItems.Add(' ');
     item.SubItems.Add('Conectado...');
