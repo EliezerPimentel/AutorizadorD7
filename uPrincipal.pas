@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, jpeg, ExtCtrls, StdCtrls, Menus, XPMan;
+  Dialogs, jpeg, ExtCtrls, StdCtrls, Menus, XPMan, ComCtrls;
 
 type
   TformPrincipal = class(TForm)
@@ -148,7 +148,10 @@ begin
 end;
 
 procedure TformPrincipal.RestauraConfiguracoes;
-var l: TStrings;
+var l, l2: TStrings;
+    i: integer;
+    sChave, sValor: string;
+    item: TListItem;
 begin
   if (FileExists(FN_ARQUIVO_INICIALIZACAO) = false) then exit;
 
@@ -179,8 +182,24 @@ begin
     then ultLinhas.Text    := l.Values['ultLinhas']
     else ultLinhas.Text    := '200';
 
-    if (l.Values['string_retorno'] <> '')
-    then Servidor_String_Retorno.Text    := l.Values['string_retorno']
+    if (l.Values['string_retorno'] <> '') then
+    begin
+      Servidor_String_Retorno.Text    := l.Values['string_retorno'];
+      // Atualiza campos de retorno em formServidor
+      l2 := TStringList.Create;
+      l2.CommaText := l.Values['string_retorno'];
+
+      for i := 0 to l2.Count -1 do
+      begin
+        sChave := l2.Names[i];
+        sValor := l2.ValueFromIndex[i];
+        item   := lvChaves.Items.Add;
+        item.Caption := sChave;
+        item.SubItems.Add(sValor);
+      end;
+
+      l2.Free;
+    end
     else Servidor_String_Retorno.Text    := '';
   end;
 

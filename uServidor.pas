@@ -610,10 +610,13 @@ begin
   for i := 0 to lvChaves.Items.Count -1 do
   begin
     item   := lvChaves.Items[i];
-    sChave := item.Caption;
-    sValor := item.SubItems[0];
+    sChave := trim(item.Caption);
+    sValor := trim(item.SubItems[0]);
 
-    sList := sList + '"' + sChave + '=' + sValor + '",';
+    if (sChave <> '') and (sValor <> '') then
+    begin
+      sList := sList + '"' + sChave + '=' + sValor + '",';
+    end;
   end;
 
   formServidor.Servidor_string_retorno.Text := sList;

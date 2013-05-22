@@ -26,7 +26,7 @@ object formServidor: TformServidor
     Top = 42
     Width = 659
     Height = 426
-    ActivePage = tabRede
+    ActivePage = tabRetorno
     Align = alClient
     Style = tsButtons
     TabOrder = 0
